@@ -8,7 +8,6 @@ const nextConfig = {
   pageExtensions: ['page.tsx', 'api.ts'],
   swcMinify: true,
 
-  // Uncoment to add domain whitelist
   images: {
     remotePatterns: [
       {
@@ -20,8 +19,8 @@ const nextConfig = {
     ],
   },
 
-  // SVGR
-  webpack(config) {
+  // SVGR + Disable webpack cache
+  webpack(config, { dev }) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
@@ -35,6 +34,11 @@ const nextConfig = {
         },
       ],
     });
+
+    // Disable webpack cache in production
+    if (!dev) {
+      config.cache = false;
+    }
 
     return config;
   },
