@@ -25,15 +25,12 @@ jobs:
         run: yarn lint
 
       - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: 
-          npx sonar-scanner \
-            -Dsonar.projectKey=jasmrntha_pso-fp-frontend\
-            -Dsonar.organization=pso-fp-25 \
-            -Dsonar.sources=src \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: -Dsonar.qualitygate.wait=true
 
       - name: Build frontend
         run: yarn build
