@@ -1,0 +1,41 @@
+name: CD Development Pipeline - Deploy to Vercel
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline - Frontend"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build frontend
+        run: yarn build && rm -rf .next/cache
+
+      - name: Set Vercel-compatible Git user (bypass)
+        run: |
+          git config --local user.email "vercel-deploy@example.com"
+          git config --local user.name "kelompok 5"
+
+      - name: Deploy to Vercel
+        run: |
+          curl -X POST "https://api.vercel.com/v13/deployments" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "name": "pso-fp-frontend",
+              "gitSource": {
+                "type": "github",
+                "repoId": "${{ github.repository_id }}",
+                "ref": "main"
+              }
+            }'
