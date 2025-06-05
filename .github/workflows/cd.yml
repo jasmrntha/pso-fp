@@ -34,8 +34,10 @@ jobs:
             -d '{
               "name": "pso-fp-frontend",
               "gitSource": {
-                "type": "github",
-                "repoId": "${{ github.repository_id }}",
-                "ref": "main"
-              }
-            }'
+              "type": "github",
+              "repoId": "${{ github.repository_id }}",
+              "ref": "main"
+            },
+          "target": "production"
+          }'
+
