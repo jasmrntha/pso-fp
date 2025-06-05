@@ -113,7 +113,7 @@ function LoginPage() {
               </Button>
             </div>
             <Typography variant='b1'>
-              New to Mangan Mas Bro? Join the community and create your account{' '}
+              New to Buku Resep Join the community and create your account{' '}
               <PrimaryLink href='/auth/register'>here</PrimaryLink>
             </Typography>
           </form>

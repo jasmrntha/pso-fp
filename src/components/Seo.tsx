@@ -2,10 +2,10 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 const defaultMeta = {
-  title: 'Mangan Mas Bro!',
-  siteName: 'Mangan Mas Bro!',
+  title: 'Buku Resep',
+  siteName: 'Buku Resep',
   description:
-    'Mangan Mas Bro adalah aplikasi untuk menemukan dan menyajikan resep-resep lezat dari seluruh penjuru dunia. Temukan ragam masakan yang menggoda selera, panduan langkah demi langkah yang jelas, dan tips ahli untuk meraih kesuksesan dalam dapur Anda.',
+    'Buku Resep adalah aplikasi untuk menemukan dan menyajikan resep-resep lezat dari seluruh penjuru dunia. Temukan ragam masakan yang menggoda selera, panduan langkah demi langkah yang jelas, dan tips ahli untuk meraih kesuksesan dalam dapur Anda.',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
   url: 'localhost:3000',
   type: 'website',

@@ -11,7 +11,7 @@ export default function Header() {
           href='/'
           className='font-bold text-primary-500 hover:text-primary-600'
         >
-          Mangan Mas Bro
+          Buku Resep
         </UnstyledLink>
         <nav>
           <ul className='flex items-center justify-between space-x-4'>
