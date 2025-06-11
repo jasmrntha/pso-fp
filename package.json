@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit --incremental false",
     "test:watch": "jest --watch",
     "test": "jest --coverage --findRelatedTests src/pages/404.page.tsx",
+    "test:404": "jest --coverage src/__tests__/pages/404.test.tsx",
     "format": "prettier -w .",
     "format:check": "prettier -c .",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
