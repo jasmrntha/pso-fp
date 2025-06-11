@@ -26,19 +26,13 @@ const customJestConfig = {
 
   collectCoverageFrom: [
     'src/pages/404.page.tsx',
-    'src/pages/index.page.tsx',
-    'src/pages/dashboard/**/*.{ts,tsx}',
-    '!src/pages/dashboard/recipes/**/*.{ts,tsx}', // 👈 ignore this folder
-    'src/pages/recipe/**/*.{ts,tsx}',
+    // 'src/pages/index.page.tsx',
+    // 'src/pages/dashboard/**/*.{ts,tsx}',
+    // '!src/pages/dashboard/recipes/**/*.{ts,tsx}', // 👈 ignore this folder
+    // 'src/pages/recipe/**/*.{ts,tsx}',
   ],
-  // ✅ Add this block to include all source files in coverage
+  // testPathIgnorePatterns: ['<rootDir>/src/**/*.test.tsx', '<rootDir>/src/**/*.spec.tsx'],
   collectCoverage: true,
-  // collectCoverageFrom: [
-  //   'src/**/*.{ts,tsx}',
-  //   '!src/**/*.d.ts',
-  //   '!src/**/__tests__/**',
-  //   '!src/**/?(*.)+(spec|test).[jt]s?(x)',
-  // ],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
