@@ -15,7 +15,8 @@ export default function RecipeCard({
   href: string;
 }) {
   return (
-    <div className='w-full rounded-md bg-white drop-shadow'>
+    <div className='w-full h-full rounded-md bg-white drop-shadow flex flex-col'>
+      {/* Image section */}
       <div className='relative w-full'>
         <NextImage
           src={recipe.thumbnail}
@@ -34,8 +35,11 @@ export default function RecipeCard({
           </div>
         </div>
       </div>
-      <div className='flex w-full flex-col gap-3 py-4 px-6'>
+
+      {/* Content section */}
+      <div className='flex flex-col gap-3 py-4 px-6 flex-1'>
         <Typography variant='h3'>{recipe.name}</Typography>
+
         <div className='flex flex-row items-center justify-between'>
           <div className='flex flex-row items-center gap-1'>
             <Utensils size={24} />
@@ -48,18 +52,26 @@ export default function RecipeCard({
             </Typography>
           </div>
         </div>
+
         <div className='flex flex-row items-center justify-between'>
           <div className='flex flex-row items-center gap-1'>
             <Globe size={24} />
             <Typography variant='b3'>{recipe.origin}</Typography>
           </div>
         </div>
-        <Typography variant='b2'>{recipe.description}</Typography>
-        <ButtonLink href={href} variant='primary'>
-          {href.startsWith('/dashboard/recipes')
-            ? 'Edit Recipe'
-            : 'View Recipe'}
-        </ButtonLink>
+
+        <Typography variant='b2'>
+          {recipe.description.replace(/(<([^>]+)>)/gi, '').slice(0, 120)}...
+        </Typography>
+
+        {/* Ensure button is always at the bottom */}
+        <div className='mt-auto pt-4'>
+          <ButtonLink href={href} variant='primary' className='w-full'>
+            {href.startsWith('/dashboard/recipes')
+              ? 'Edit Recipe'
+              : 'View Recipe'}
+          </ButtonLink>
+        </div>
       </div>
     </div>
   );
