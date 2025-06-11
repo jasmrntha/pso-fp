@@ -26,6 +26,9 @@ jobs:
 
       - name: Run tests with coverage
         run: yarn test
+      
+      - name: List coverage files
+        run: ls -lah coverage/
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v4

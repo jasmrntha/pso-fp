@@ -31,6 +31,14 @@ const customJestConfig = {
     '!src/pages/dashboard/recipes/**/*.{ts,tsx}', // 👈 ignore this folder
     'src/pages/recipe/**/*.{ts,tsx}',
   ],
+  // ✅ Add this block to include all source files in coverage
+  collectCoverage: true,
+  // collectCoverageFrom: [
+  //   'src/**/*.{ts,tsx}',
+  //   '!src/**/*.d.ts',
+  //   '!src/**/__tests__/**',
+  //   '!src/**/?(*.)+(spec|test).[jt]s?(x)',
+  // ],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
