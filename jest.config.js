@@ -23,6 +23,14 @@ const customJestConfig = {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^~/(.*)$': '<rootDir>/public/$1',
   },
+
+  collectCoverageFrom: [
+    'src/pages/404.page.tsx',
+    'src/pages/index.page.tsx',
+    'src/pages/dashboard/**/*.{ts,tsx}',
+    '!src/pages/dashboard/recipes/**/*.{ts,tsx}', // 👈 ignore this folder
+    'src/pages/recipe/**/*.{ts,tsx}',
+  ],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
