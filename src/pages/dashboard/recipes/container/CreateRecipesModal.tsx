@@ -79,15 +79,6 @@ export default function CreateRecipesModal({
     })
   );
 
-  // const onSubmit: SubmitHandler<FieldValues> = (data) => {
-  //   const parsedData: RecipeCreateTypes = {
-  //     ...data,
-  //     vegan: data.vegan === 'true', // Safely convert string to boolean
-  //   };
-
-  //   handleAdd(parsedData as RecipeCreateTypes);
-  // };
-
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const typedData = data as unknown as RecipeCreateTypes;
 

@@ -18,6 +18,7 @@ import Radio from '@/components/forms/Radio';
 import SearchableSelectInput from '@/components/forms/SearchableSelectInput';
 import withAuth from '@/components/hoc/withAuth';
 import Layout from '@/components/layout/Layout';
+import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
@@ -26,6 +27,7 @@ import {
   Category,
   Origin,
 } from '@/pages/dashboard/recipes/container/CreateRecipesModal';
+import DeleteRecipeModal from '@/pages/dashboard/recipes/container/DeleteRecipesModal';
 
 import { ApiResponse } from '@/types/api';
 import { RecipeTypes } from '@/types/entity/recipes';
@@ -40,15 +42,6 @@ function DashboardDetailRecipes() {
   ]);
   const recipe = queryData?.data;
 
-  const { mutate: handleDelete, isLoading: isLoadingDel } = useMutationToast<
-    void,
-    unknown
-  >(
-    useMutation(async () => {
-      await api.delete(`/recipes/create/${id}`);
-    })
-  );
-
   const methods = useForm({
     mode: 'onTouched',
   });
@@ -58,18 +51,33 @@ function DashboardDetailRecipes() {
   const [isEdit, setIsEdit] = React.useState(false);
 
   const { mutate: handleEdit, isLoading } = useMutationToast<void, RecipeTypes>(
-    useMutation(async (data) => {
-      await api.put(`/recipes/update/${id}`, data);
-    })
+    useMutation(
+      async (data) => {
+        await api.put(`/recipes/update/${id}`, data);
+      },
+      {
+        onSuccess: () => {
+          router.reload();
+        },
+      }
+    )
   );
-
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    handleEdit(data as RecipeTypes);
-  };
 
   if (!recipe) {
     return <NotFoundPage />;
   }
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const typedData = data as unknown as RecipeTypes;
+
+    const parsedData: RecipeTypes = {
+      ...typedData,
+      cookTime: Number(typedData.cookTime),
+      vegan: data.vegan === 'true',
+    };
+
+    handleEdit(parsedData);
+  };
 
   return (
     <Layout withHeader={true}>
@@ -78,31 +86,55 @@ function DashboardDetailRecipes() {
         <section className='flex flex-col gap-4 bg-white'>
           <div className='flex flex-row items-center justify-between'>
             <Typography variant='h1'>{recipe.name}</Typography>
-            <div className='flex flex-row items-center justify-between'>
-              <Button
-                variant='outline'
-                color='red'
-                size='sm'
-                leftIcon={Trash}
-                onClick={handleDelete}
-                isLoading={isLoadingDel}
-              >
-                Delete
-              </Button>
-              <Button
-                variant='outline'
-                color='blue'
-                size='sm'
-                leftIcon={Pencil}
-                onClick={() => setIsEdit((prev) => !prev)}
-              >
-                Edit
-              </Button>
-            </div>
+            <div className='flex flex-row gap-2 items-center justify-between'>
+              {!isEdit ? (
+                <>
+                  <DeleteRecipeModal recipeId={id}>
+                    {({ openModal }) => (
+                      <Button
+                        variant='danger'
+                        size='sm'
+                        leftIcon={Trash}
+                        onClick={openModal}
+                      >
+                        Delete
+                      </Button>
+                    )}
+                  </DeleteRecipeModal>
 
+                  <Button
+                    variant='outline'
+                    color='blue'
+                    size='sm'
+                    leftIcon={Pencil}
+                    onClick={() => setIsEdit((prev) => !prev)}
+                  >
+                    Edit
+                  </Button>
+                </>
+              ) : null}
+            </div>
+          </div>
+
+          <div className='flex flex-col gap-2'>
+            {/* Thumbnail Preview */}
+            <div className='flex items-start justify-center'>
+              <NextImage
+                src={recipe.thumbnail}
+                alt='food'
+                width={300}
+                height={300}
+                className='w-full'
+                imgClassName='w-full h-full object-cover rounded-t-md'
+              />
+            </div>
+          </div>
+
+          <div className='flex flex-col gap-3'>
             <FormProvider {...methods}>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='flex flex-col gap-3'>
+                <div className='flex flex-col gap-3 mt-3'>
+                  <Typography variant='h3'>Recipe Details</Typography>
                   <Input
                     id='name'
                     label='Name'
@@ -121,7 +153,7 @@ function DashboardDetailRecipes() {
                     defaultValue={recipe.description}
                     readOnly={!isEdit}
                   />
-                  {isEdit ? (
+                  {!isEdit ? (
                     <Input
                       id='category'
                       label='Category'
@@ -170,6 +202,7 @@ function DashboardDetailRecipes() {
                     label='Cook Time'
                     validation={{ required: 'Field must be filled' }}
                     placeholder='Enter your recipe cook time'
+                    defaultValue={recipe.cookTime}
                     required
                     readOnly={!isEdit}
                   />
@@ -182,7 +215,7 @@ function DashboardDetailRecipes() {
                     readOnly={!isEdit}
                     defaultValue={recipe.thumbnail}
                   />
-                  {isEdit ? (
+                  {!isEdit ? (
                     <Input
                       id='origin'
                       label='Origin'
@@ -197,6 +230,7 @@ function DashboardDetailRecipes() {
                       id='origin'
                       label='Origin'
                       placeholder='Select something'
+                      defaultValue={recipe.origin}
                       options={Origin.map((origin) => ({
                         label: origin,
                         value: origin,
@@ -205,47 +239,68 @@ function DashboardDetailRecipes() {
                       required
                     />
                   )}
-                  {Array.from({ length: 20 }, (_, index) => (
-                    <Input
-                      key={index}
-                      id={`ingredient${index + 1}`}
-                      label={`Ingredient ${index + 1}`}
-                      validation={{ required: 'Field must be filled' }}
-                      placeholder='Enter your recipe ingredients'
-                      required={index === 0}
-                      readOnly={!isEdit}
-                      defaultValue={recipe.ingredients[index]}
-                    />
-                  ))}
-                  {Array.from({ length: 20 }, (_, index) => (
-                    <Input
-                      key={index}
-                      id={`measure${index + 1}`}
-                      label={`Measure ${index + 1}`}
-                      validation={{ required: 'Field must be filled' }}
-                      placeholder='Enter your recipe measure'
-                      required={index === 0}
-                      readOnly={!isEdit}
-                      defaultValue={recipe.measures[index]}
-                    />
-                  ))}
-                  {Array.from({ length: 20 }, (_, index) => (
-                    <Input
-                      key={index}
-                      id={`step${index + 1}`}
-                      label={`Step ${index + 1}`}
-                      validation={{ required: 'Field must be filled' }}
-                      placeholder='Enter your recipe step'
-                      required={index === 0}
-                      readOnly={!isEdit}
-                      defaultValue={recipe.steps[index]}
-                    />
-                  ))}
+
+                  <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-3'>
+                    <div className='flex flex-col gap-2'>
+                      <Typography variant='h3'>Ingredients</Typography>
+                      {Array.from({ length: 20 }, (_, index) => (
+                        <Input
+                          key={`ingredient${index}`}
+                          id={`ingredient${index + 1}`}
+                          label={`Ingredient ${index + 1}`}
+                          placeholder='Enter ingredient'
+                          required={index === 0}
+                          readOnly={!isEdit}
+                          defaultValue={recipe.ingredients[index]}
+                        />
+                      ))}
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <Typography variant='h3'>Measures</Typography>
+                      {Array.from({ length: 20 }, (_, index) => (
+                        <Input
+                          key={`measure${index}`}
+                          id={`measure${index + 1}`}
+                          label={`Measure ${index + 1}`}
+                          placeholder='Enter measure'
+                          required={index === 0}
+                          readOnly={!isEdit}
+                          defaultValue={recipe.measures[index]}
+                        />
+                      ))}
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <Typography variant='h3'>Steps</Typography>
+                      {Array.from({ length: 20 }, (_, index) => (
+                        <Input
+                          key={`step${index}`}
+                          id={`step${index + 1}`}
+                          label={`Step ${index + 1}`}
+                          placeholder='Enter step'
+                          required={index === 0}
+                          readOnly={!isEdit}
+                          defaultValue={recipe.steps[index]}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className='flex justify-end gap-2'>
-                  <Button type='submit' isLoading={isLoading}>
-                    Submit
-                  </Button>
+                <div className='flex justify-end gap-2 mt-2'>
+                  {isEdit ? (
+                    <>
+                      <Button
+                        variant='outline'
+                        color='gray'
+                        size='sm'
+                        onClick={() => setIsEdit(false)}
+                      >
+                        Cancel
+                      </Button>
+                      <Button type='submit' isLoading={isLoading}>
+                        Submit
+                      </Button>
+                    </>
+                  ) : null}
                 </div>
               </form>
             </FormProvider>
