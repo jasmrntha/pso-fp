@@ -3,6 +3,15 @@ import { useRouter } from 'next/router';
 
 import DashboardPage from '@/pages/dashboard/index.page';
 
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation((msg, ...args) => {
+    if (typeof msg === 'string' && msg.includes('ReactDOMTestUtils.act')) {
+      return;
+    }
+    console.error(msg, ...args);
+  });
+});
+
 // 🧪 Mock the router and withAuth
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
