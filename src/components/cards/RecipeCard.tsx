@@ -56,7 +56,9 @@ export default function RecipeCard({
         </div>
         <Typography variant='b2'>{recipe.description}</Typography>
         <ButtonLink href={href} variant='primary'>
-          {href.startsWith('/recipes/') ? 'View Recipe' : 'Edit Recipe'}
+          {href.startsWith('/dashboard/recipes')
+            ? 'Edit Recipe'
+            : 'View Recipe'}
         </ButtonLink>
       </div>
     </div>

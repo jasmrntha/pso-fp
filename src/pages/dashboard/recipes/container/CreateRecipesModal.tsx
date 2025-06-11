@@ -38,14 +38,14 @@ export const Category = [
 
 export const Origin = [
   'Asian',
-  'Middle Eastern',
+  'MiddleEastern',
   'Indian',
   'African',
-  'Latin American',
+  'LatinAmerican',
   'Mediterranean',
   'Western',
-  'Southeast Asian',
-  'Eastern European',
+  'SoutheastAsian',
+  'EasternEuropean',
   'Scandinavian',
 ];
 
@@ -79,8 +79,25 @@ export default function CreateRecipesModal({
     })
   );
 
+  // const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  //   const parsedData: RecipeCreateTypes = {
+  //     ...data,
+  //     vegan: data.vegan === 'true', // Safely convert string to boolean
+  //   };
+
+  //   handleAdd(parsedData as RecipeCreateTypes);
+  // };
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    handleAdd(data as RecipeCreateTypes);
+    const typedData = data as unknown as RecipeCreateTypes;
+
+    const parsedData: RecipeCreateTypes = {
+      ...typedData,
+      cookTime: Number(typedData.cookTime),
+      vegan: data.vegan === 'true',
+    };
+
+    handleAdd(parsedData);
   };
 
   return (
@@ -91,6 +108,7 @@ export default function CreateRecipesModal({
         setOpen={setOpen}
         title='Add New Recipe'
         className='z-[100]'
+        modalContainerClassName='md:max-w-3xl'
       >
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -126,17 +144,18 @@ export default function CreateRecipesModal({
                     Is Vegan? <span className='text-red-500'>*</span>
                   </Typography>
                   <div className='flex flex-row gap-4'>
-                    <Radio name='vegan' label='Yes' value='yes' hideError />
+                    <Radio name='vegan' label='Yes' value='true' hideError />
                     <Radio
                       name='vegan'
                       label='No'
-                      value='no'
+                      value='false'
                       validation={{ required: 'Is Vegan must be filled' }}
                     />
                   </div>
                 </div>
                 <Input
                   id='cookTime'
+                  type='number'
                   label='Cook Time'
                   validation={{ required: 'Field must be filled' }}
                   placeholder='Enter your recipe cook time'
@@ -160,36 +179,45 @@ export default function CreateRecipesModal({
                   validation={{ required: 'Origin must be filled' }}
                   required
                 />
-                {Array.from({ length: 20 }, (_, index) => (
-                  <Input
-                    key={index}
-                    id={`ingredient${index + 1}`}
-                    label={`Ingredient ${index + 1}`}
-                    validation={{ required: 'Field must be filled' }}
-                    placeholder='Enter your recipe ingredients'
-                    required={index === 0}
-                  />
-                ))}
-                {Array.from({ length: 20 }, (_, index) => (
-                  <Input
-                    key={index}
-                    id={`measure${index + 1}`}
-                    label={`Measure ${index + 1}`}
-                    validation={{ required: 'Field must be filled' }}
-                    placeholder='Enter your recipe measure'
-                    required={index === 0}
-                  />
-                ))}
-                {Array.from({ length: 20 }, (_, index) => (
-                  <Input
-                    key={index}
-                    id={`step${index + 1}`}
-                    label={`Step ${index + 1}`}
-                    validation={{ required: 'Field must be filled' }}
-                    placeholder='Enter your recipe step'
-                    required={index === 0}
-                  />
-                ))}
+
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+                  <div className='flex flex-col gap-2'>
+                    <Typography variant='s3'>Ingredients</Typography>
+                    {Array.from({ length: 10 }, (_, index) => (
+                      <Input
+                        key={`ingredient-${index}`}
+                        id={`ingredient${index + 1}`}
+                        label={`Ingredient ${index + 1}`}
+                        placeholder='Enter ingredient'
+                        required={index === 0}
+                      />
+                    ))}
+                  </div>
+                  <div className='flex flex-col gap-2'>
+                    <Typography variant='s3'>Measures</Typography>
+                    {Array.from({ length: 10 }, (_, index) => (
+                      <Input
+                        key={`measure-${index}`}
+                        id={`measure${index + 1}`}
+                        label={`Measure ${index + 1}`}
+                        placeholder='Enter measure'
+                        required={index === 0}
+                      />
+                    ))}
+                  </div>
+                  <div className='flex flex-col gap-2'>
+                    <Typography variant='s3'>Steps</Typography>
+                    {Array.from({ length: 10 }, (_, index) => (
+                      <Input
+                        key={`step-${index}`}
+                        id={`step${index + 1}`}
+                        label={`Step ${index + 1}`}
+                        placeholder='Enter step'
+                        required={index === 0}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </Modal.Section>
             <Modal.Section>
