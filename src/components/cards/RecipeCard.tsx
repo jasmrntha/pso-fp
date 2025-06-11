@@ -7,6 +7,11 @@ import Typography from '@/components/typography/Typography';
 
 import { RecipeTypes } from '@/types/entity/recipes';
 
+function stripHtml(html: string): string {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  return doc.body.textContent || '';
+}
+
 export default function RecipeCard({
   recipe,
   href,
@@ -61,7 +66,7 @@ export default function RecipeCard({
         </div>
 
         <Typography variant='b2'>
-          {recipe.description.replace(/(<([^>]+)>)/gi, '').slice(0, 120)}...
+          {stripHtml(recipe.description).slice(0, 120)}...
         </Typography>
 
         {/* Ensure button is always at the bottom */}
