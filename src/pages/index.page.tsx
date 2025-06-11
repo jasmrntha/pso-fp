@@ -21,9 +21,9 @@ export default function HomePage() {
 
       <main className='mx-auto flex w-11/12 flex-col gap-12 py-16 md:w-10/12'>
         <section className='flex flex-col gap-4 bg-white'>
-          <Typography variant='j2'>Trending Recipes</Typography>
+          <Typography variant='j2'>Resep Anda</Typography>
           {recipes?.length === 0 ? (
-            <Typography variant='b2'>No recipes found</Typography>
+            <Typography variant='b2'>Tidak ada resep</Typography>
           ) : (
             <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
               {recipes?.map((recipe) => (

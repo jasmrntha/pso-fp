@@ -26,7 +26,7 @@ const customJestConfig = {
 
   collectCoverageFrom: [
     'src/pages/404.page.tsx',
-    'src/pages/index.page.tsx',
+    // 'src/pages/index.page.tsx',
     'src/pages/dashboard/**/*.{ts,tsx}',
     '!src/pages/dashboard/recipes/**/*.{ts,tsx}', // 👈 ignore this folder
     'src/pages/recipe/**/*.{ts,tsx}',

@@ -24,8 +24,8 @@ jobs:
             export PATH=~/.nvm/versions/node/v22.3.0/bin:$PATH
             cd /var/www/pso-fp-frontend
             git stash
-            git checkout production
-            git pull --rebase origin production
+            git checkout main
+            git pull --rebase origin main
             yarn install
             yarn run build
             pm2 restart pso-frontend

@@ -1,26 +1,57 @@
-# Aether Design System
+# Buku Resep
 
-This design system is built using [ts-nextjs-tailwind-starter](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter) with the [expansion pack](https://github.com/theodorusclarence/expansion-pack), then adjusted based on the needs of the project.
+Website **Buku Resep** adalah aplikasi penyimpanan resep yang menyediakan fitur login, registrasi, dan penambahan resep. Untuk menjaga kualitas dan kecepatan pengembangan, kami menerapkan pendekatan **DevOps** menggunakan **CI/CD Pipeline** dan berbagai alat bantu otomatisasi.
 
-Aether serves as the building block for our projects. Feel free to use this design system for your projects.
+## Anggota Kelompok
 
-Expansions used:
+- Agnes Juliana (5026221006)
+- Dewi Maharani (5026221046)
+- Mufidhatul Nafisa (5026221035)
+- Jasmine Saimarantha Br Ginting (5026221107)
 
-- [React Hook Form](https://github.com/theodorusclarence/expansion-pack#react-hook-form)
-- [Toast with React Query](https://github.com/theodorusclarence/expansion-pack#react-query)
-- [Dialog Manager with Zustand](https://github.com/theodorusclarence/expansion-pack#react-query)
-- [NProgress](https://github.com/theodorusclarence/expansion-pack#nprogress)
+## Bagaimana dengan Backendnya?
+intinya backend ada di server lain, anggep aja ambil dari yang sudah ada
 
-## Motive
+## Cara menjalankan project
+deskripsi?
 
-We usually build a design system before the start of a project. Aether is an actual design system we use for our private projects, and we decided to open-source it.
+### Install dependencies yang diperlukan
 
-## Creator
+### Nonaktifkan CI/CD
 
-- [Theodorus Clarence](https://github.com/theodorusclarence)
-- [Rizqi Tsani](https://github.com/rizqitsani)
-- [Wina Tungmiharja](https://github.com/winatungmiharja)
+### Jalankan script build
 
-## Attribution
+### Jalankan script start
 
-Design is mostly inspired by [moon.io](https://moon.io/), adjusted to our needs.
+### Alternatif lain: Jalankan script dev 
+tanpa build juga bisa jalan
+
+## Cara kerja CI/CD
+deskripsi
+pastikan sudah set secret key yang diperlukan
+
+### CI
+- install dependencies
+- jalankan script lint untuk trigger eslint (apakah kode sudah sesuai standar)
+- jalankan script test untuk trigger test coverage jest 
+- list file hasil coverage untuk memastikan test berhasil
+- panggil sonarqube untuk melakukan scan dari hasil coverage
+- build aplikasi
+
+### CD
+- pastikan CI sudah sukses
+- install dependencies
+- build aplikasi
+- apabila deploy ke vercel
+set usernme untuk vercel agar dapat bypass fitur vercel
+deploy ke vercel pakai curl
+- apabila deploy ke VPS
+masuk ke folder website di VPS
+stash update
+fetch update
+pull rebase dari main
+install di VPS
+build di VPS
+restart pm2 
+restart nginx
+
