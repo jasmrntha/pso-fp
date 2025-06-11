@@ -1,4 +1,4 @@
-name: CI Pipeline - Frontend 
+name: CI Pipeline - Frontend
 on:
   push:
     branches:
@@ -30,7 +30,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
-          args: -Dsonar.qualitygate.wait=true
+          args: >
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.qualitygate.wait=true
 
       - name: Build frontend
         run: yarn build
