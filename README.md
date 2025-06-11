@@ -9,12 +9,49 @@ Website **Buku Resep** adalah aplikasi penyimpanan resep yang menyediakan fitur 
 - Mufidhatul Nafisa (5026221035)
 - Jasmine Saimarantha Br Ginting (5026221107)
 
-## How to run this project
+## Bagaimana dengan Backendnya?
+intinya backend ada di server lain, anggep aja ambil dari yang sudah ada
 
-### install required packages
+## Cara menjalankan project
+deskripsi?
 
-### disable CI/CD
+### Install dependencies yang diperlukan
 
-### build the project
+### Nonaktifkan CI/CD
 
-### run in on your local environtment
+### Jalankan script build
+
+### Jalankan script start
+
+### Alternatif lain: Jalankan script dev 
+tanpa build juga bisa jalan
+
+## Cara kerja CI/CD
+deskripsi
+pastikan sudah set secret key yang diperlukan
+
+### CI
+- install dependencies
+- jalankan script lint untuk trigger eslint (apakah kode sudah sesuai standar)
+- jalankan script test untuk trigger test coverage jest 
+- list file hasil coverage untuk memastikan test berhasil
+- panggil sonarqube untuk melakukan scan dari hasil coverage
+- build aplikasi
+
+### CD
+- pastikan CI sudah sukses
+- install dependencies
+- build aplikasi
+- apabila deploy ke vercel
+set usernme untuk vercel agar dapat bypass fitur vercel
+deploy ke vercel pakai curl
+- apabila deploy ke VPS
+masuk ke folder website di VPS
+stash update
+fetch update
+pull rebase dari main
+install di VPS
+build di VPS
+restart pm2 
+restart nginx
+
