@@ -13,31 +13,33 @@ Website **Buku Resep** adalah aplikasi penyimpanan resep yang menyediakan fitur 
 
 Backend untuk aplikasi ini berada pada server terpisah yang telah tersedia.
 
+## Apa saja yang dibutuhkan
+1. Node js versi > 18
+
 ## Cara menjalankan project
+### 1. Clone repository
+```git clone https://github.com/jasmrntha/pso-fp.git```
 
-git clone https://github.com/jasmrntha/pso-fp.git
+### 2. Masuk ke repository yang sudah di clone
+```cd pso-fp```
 
-cd pso-fp
+### 3. Install dependencies yang diperlukan
+```yarn install```
 
-### Install dependencies yang diperlukan
+### 4. Nonaktifkan CI/CD
+Tidak perlu konfigurasi tambahan untuk menjalankan secara lokal. CI/CD hanya berjalan otomatis saat push ke repository dan membtuhkan secret keys.
 
-yarn install
+### 5. Jalankan script build
 
-### Nonaktifkan CI/CD
+```yarn build```
 
-Tidak perlu konfigurasi tambahan untuk menjalankan secara lokal. CI/CD hanya berjalan otomatis saat push ke repository.
+### 6. Jalankan script start
 
-### Jalankan script build
-
-yarn build
-
-### Jalankan script start
-
-yarn start
+```yarn start```
 
 ### Alternatif lain: Jalankan script dev
-
-yarn dev
+Apabila menjalankan dev tidak perlu melakukan build terlebih dahulu
+```yarn dev```
 
 ## Cara kerja CI/CD
 
@@ -58,10 +60,10 @@ Pastikan seluruh secret key yang diperlukan sudah diatur di GitHub Secrets sebel
 - pastikan CI sudah sukses
 - install dependencies
 - build aplikasi
-- apabila deploy ke vercel
-  set usernme untuk vercel agar dapat bypass fitur vercel
-  deploy ke vercel pakai curl
-- apabila deploy ke VPS
+### Apabila deploy ke vercel
+- set usernme untuk vercel agar dapat bypass fitur vercel
+- deploy ke vercel pakai curl
+### Apabila deploy ke VPS
   masuk ke folder website di VPS
   stash update
   fetch update
