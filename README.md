@@ -1,4 +1,5 @@
 # Buku Resep
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/c088798d-0757-4b80-8205-0b8e1f49f913" />
 
 Website **Buku Resep** adalah aplikasi penyimpanan resep yang menyediakan fitur login, registrasi, dan penambahan resep. Untuk menjaga kualitas dan kecepatan pengembangan, kami menerapkan pendekatan **DevOps** menggunakan **CI/CD Pipeline** dan berbagai alat bantu otomatisasi.
 
@@ -9,61 +10,126 @@ Website **Buku Resep** adalah aplikasi penyimpanan resep yang menyediakan fitur 
 - Mufidhatul Nafisa (5026221035)
 - Jasmine Saimarantha Br Ginting (5026221107)
 
-## Bagaimana dengan Backendnya?
+## ✨ Fitur Website
+- **Landing Page**: Melihat resep dari semua pengguna.
+- **Detail Resep**: Melihat detail resep, bahan beserta ukurannya dan langkah-langkah. 
+- **Login & Register**: Membuat dan masuk ke dalam akun pengguna. 
+- **Dashboard Pengguna**: Melihat resep yang pernah dibuat.
+- **Manajemen Resep**: Menambahkan, mengedit dan menghapus resep milik pengguna. 
 
-Backend untuk aplikasi ini berada pada server terpisah yang telah tersedia.
+## 📚 Technology Stack
+#### Frontend
+- **Next.js** – Framework React modern untuk membuat aplikasi web dengan rendering sisi server (SSR) dan static site generation (SSG).
+- **TypeScript** – Superset JavaScript yang menambahkan pengetikan statis untuk meningkatkan keandalan dan skalabilitas kode.
+- **Tailwind** – Utility-first CSS framework untuk membangun UI yang responsif dan konsisten secara efisien.
+- **NextUI** – Komponen UI modern dan stylish yang terintegrasi dengan baik dalam proyek Next.js.
 
-## Apa saja yang dibutuhkan
-1. Node js versi > 18
+#### Backend
+Backend untuk aplikasi ini berada pada server terpisah yang telah tersedia (https://recipe-api.betau.asia/api)
 
-## Cara menjalankan project
-### 1. Clone repository
-```git clone https://github.com/jasmrntha/pso-fp.git```
+#### Infrastruktur Server
+- **VPS** – Server virtual untuk hosting aplikasi dengan kontrol penuh.
+- **PM2** – Process manager Node.js untuk menjaga aplikasi tetap aktif.
+- **Nginx** – Reverse proxy untuk routing trafik dan handle HTTPS.
 
-### 2. Masuk ke repository yang sudah di clone
-```cd pso-fp```
+#### Development & Testing
+- **Yarn** – Manajer paket JavaScript cepat dan efisien.
+- **ESLint** – Alat untuk cek kualitas dan konsistensi kode.
+- **Jest** – Framework untuk unit testing JavaScript.
+- **SonarQube** – Analisis kode untuk deteksi bug dan kualitas.
 
-### 3. Install dependencies yang diperlukan
-```yarn install```
+## 🦋 Getting Started
+### Prerequisites
+- Node js versi > 18
+- Yarn (atau package manager lain)
 
-### 4. Nonaktifkan CI/CD
-Tidak perlu konfigurasi tambahan untuk menjalankan secara lokal. CI/CD hanya berjalan otomatis saat push ke repository dan membutuhkan secret keys.
+### Local Development
 
-### 5. Buat file .env
-Duplicate file .env.example dan ubah bagian `NEXT_PUBLIC_API_URL=` dengan URL API yang digunakan. Pada project ini digunakan URL yang berasal dari `https://recipe-api.betau.asia/api`
+1. **Clone repository**
 
-### 6. Jalankan script build
-```yarn build```
+   ```bash
+   git clone https://github.com/jasmrntha/pso-fp.git
+   ```
 
-### 7. Jalankan script start
-```yarn start```
+2. **Masuk ke repository**
 
-### Alternatif lain: Jalankan script dev
-Apabila menjalankan dev tidak perlu melakukan build terlebih dahulu
-```yarn dev```
+   ```bash
+   cd pso-fp
+   ```
 
-## Cara kerja CI/CD
-Proses otomatisasi deployment menggunakan GitHub Actions.
-Pastikan seluruh secret key yang diperlukan sudah diatur di GitHub Secrets sebelum pipeline berjalan.
+3. **Install dependencies**
 
-### CI
-- install dependencies
-- jalankan script lint untuk trigger eslint (apakah kode sudah sesuai standar)
-- jalankan script test untuk trigger test coverage jest
-- list file hasil coverage untuk memastikan test berhasil
-- panggil sonarqube untuk melakukan scan dari hasil coverage
+   ```bash
+   yarn install
+   ```
 
-### CD
-- pastikan CI sudah sukses
-- install dependencies
-- build aplikasi
+4. **Buat file `.env`**
+Duplikat `.env.example` lalu ubah `NEXT_PUBLIC_API_URL=` ke URL API yang digunakan, misalnya:
 
-### Apabila deploy ke VPS
-- masuk ke folder website di VPS
-- stash update
-- fetch update
-- pull rebase dari main
-- install di VPS
-- build di VPS
-- restart pm2
-- restart nginx
+   ```
+   NEXT_PUBLIC_API_URL=https://recipe-api.betau.asia/api
+   ```
+
+5. **Build project**
+
+   ```bash
+   yarn build
+   ```
+
+6. **Start project**
+
+   ```bash
+   yarn start
+   ```
+7. **Akses aplikasi**
+
+    ```bash
+    http://localhost:3000/
+    ```
+
+## 📊 CI/CD Pipeline
+<img width="925" alt="image" src="https://github.com/user-attachments/assets/74452d54-b8f6-4070-ab24-2b8548254c4f" />
+
+Berikut adalah versi yang telah dirapikan baik dari segi **kalimat** maupun **Markdown**:
+
+### 🧪 Step 1: Continuous Integration (CI)
+
+#### 📄 File: `ci.yml`
+
+#### 🔁 Trigger: Push ke semua branch
+
+#### ⚙️ Workflow:
+
+```
+1. Install dependencies
+2. Jalankan script lint untuk memastikan kode sesuai standar (ESLint)
+3. Jalankan script test untuk menjalankan unit test (Jest)
+4. Daftar file hasil coverage untuk memastikan test berhasil
+5. Jalankan SonarQube untuk menganalisis kualitas kode dan coverage
+```
+
+### 🚀 Step 2: Continuous Deployment (CD)
+
+#### 📄 File: `cd-prod.yml`
+
+#### 🔁 Trigger: Setelah pipeline CI berhasil
+
+#### ⚙️ Workflow:
+
+```
+1. Login ke server menggunakan SSH credentials dari GitHub Secrets
+2. Export path Node.js dari NVM
+3. Simpan perubahan lokal dengan git stash
+4. Checkout ke branch production
+5. Pull kode terbaru dengan git pull --rebase
+6. Jalankan yarn install untuk memastikan semua dependensi terpasang
+7. Jalankan yarn build untuk membuild aplikasi Next.js
+8. Restart aplikasi menggunakan PM2 dengan nama proses yang telah ditentukan
+9. Restart Nginx untuk menerapkan perubahan server
+```
+
+## 🔥 Live Preview
+#### Website https://recipe.betau.asia/
+
+#### Sonar Result
+<img width="758" alt="image" src="https://github.com/user-attachments/assets/f7832649-8a0a-4a72-b428-ea7312892363" />
