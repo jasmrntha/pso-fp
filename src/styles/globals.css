@@ -3,27 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --tw-color-primary-50: 255 244 238;
-  --tw-color-primary-100: 255 230 214;
-  --tw-color-primary-200: 255 204 176;
-  --tw-color-primary-300: 255 153 102;
-  --tw-color-primary-400: 255 102 51;
-  --tw-color-primary-500: 230 82 31;
-  --tw-color-primary-600: 192 64 25;
-  --tw-color-primary-700: 153 51 20;
-  --tw-color-primary-800: 102 34 14;
-  --tw-color-primary-900: 61 20 8;
+  --tw-color-primary-50: 232 252 238;
+  --tw-color-primary-100: 204 249 220;
+  --tw-color-primary-200: 163 242 192;
+  --tw-color-primary-300: 118 230 158;
+  --tw-color-primary-400: 76 221 126;
+  --tw-color-primary-500: 37 219 86; /* base */
+  --tw-color-primary-600: 30 176 70;
+  --tw-color-primary-700: 24 138 55;
+  --tw-color-primary-800: 18 99 39;
+  --tw-color-primary-900: 12 66 27;
 
-  --color-primary-50: rgb(var(--tw-color-primary-50)); /* #FFF4EE */
-  --color-primary-100: rgb(var(--tw-color-primary-100)); /* #FFE6D6 */
-  --color-primary-200: rgb(var(--tw-color-primary-200)); /* #FFCCB0 */
-  --color-primary-300: rgb(var(--tw-color-primary-300)); /* #FF9966 */
-  --color-primary-400: rgb(var(--tw-color-primary-400)); /* #FF6633 */
-  --color-primary-500: rgb(var(--tw-color-primary-500)); /* #E6521F */
-  --color-primary-600: rgb(var(--tw-color-primary-600)); /* #C04019 */
-  --color-primary-700: rgb(var(--tw-color-primary-700)); /* #993314 */
-  --color-primary-800: rgb(var(--tw-color-primary-800)); /* #66220E */
-  --color-primary-900: rgb(var(--tw-color-primary-900)); /* #3D1408 */
+  --color-primary-50: rgb(var(--tw-color-primary-50)); /* #E8FCEE */
+  --color-primary-100: rgb(var(--tw-color-primary-100)); /* #CCF9DC */
+  --color-primary-200: rgb(var(--tw-color-primary-200)); /* #A3F2C0 */
+  --color-primary-300: rgb(var(--tw-color-primary-300)); /* #76E69E */
+  --color-primary-400: rgb(var(--tw-color-primary-400)); /* #4CDD7E */
+  --color-primary-500: rgb(var(--tw-color-primary-500)); /* #25DB56 */
+  --color-primary-600: rgb(var(--tw-color-primary-600)); /* #1EB046 */
+  --color-primary-700: rgb(var(--tw-color-primary-700)); /* #188A37 */
+  --color-primary-800: rgb(var(--tw-color-primary-800)); /* #126327 */
+  --color-primary-900: rgb(var(--tw-color-primary-900)); /* #0C421B */
 }
 
 @layer base {
