@@ -64,11 +64,11 @@ Pastikan seluruh secret key yang diperlukan sudah diatur di GitHub Secrets sebel
 - set usernme untuk vercel agar dapat bypass fitur vercel
 - deploy ke vercel pakai curl
 ### Apabila deploy ke VPS
-  masuk ke folder website di VPS
-  stash update
-  fetch update
-  pull rebase dari main
-  install di VPS
-  build di VPS
-  restart pm2
-  restart nginx
+- masuk ke folder website di VPS
+- stash update
+- fetch update
+- pull rebase dari main
+- install di VPS
+- build di VPS
+- restart pm2
+- restart nginx
