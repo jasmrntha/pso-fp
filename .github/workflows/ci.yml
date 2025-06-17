@@ -27,9 +27,9 @@ jobs:
       - name: Run tests with coverage
         run: yarn test
 
-      # - name: Normalize lcov path for SonarCloud
-      #   run: |
-      #     sed -i 's|\\|/|g' coverage/lcov.info
+      - name: Normalize lcov path for SonarCloud
+        run: |
+          sed -i 's|\\|/|g' coverage/lcov.info
 
       - name: List coverage files
         run: ls -lah coverage/
@@ -41,7 +41,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
-            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.qualitygate.wait=true
 
       # - name: Build frontend
