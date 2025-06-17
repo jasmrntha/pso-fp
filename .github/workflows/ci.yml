@@ -26,10 +26,10 @@ jobs:
 
       - name: Run tests with coverage
         run: yarn test
-      
-      - name: Normalize lcov path for SonarCloud
-        run: |
-          sed -i 's|\\|/|g' coverage/lcov.info
+
+      # - name: Normalize lcov path for SonarCloud
+      #   run: |
+      #     sed -i 's|\\|/|g' coverage/lcov.info
 
       - name: List coverage files
         run: ls -lah coverage/
