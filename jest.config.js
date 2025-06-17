@@ -22,6 +22,10 @@ const customJestConfig = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^~/(.*)$': '<rootDir>/public/$1',
+    '^swiper/react$': '<rootDir>/src/__mocks__/swiperReactMock.tsx',
+    '^swiper/modules$': '<rootDir>/src/__mocks__/swiperModulesMock.tsx',
+    '^swiper/css$': 'identity-obj-proxy',
+    '^swiper/css/pagination$': 'identity-obj-proxy',
   },
 
   collectCoverageFrom: [
@@ -29,6 +33,7 @@ const customJestConfig = {
     'src/pages/dashboard/**/*.{ts,tsx}',
     '!src/pages/dashboard/recipes/**/*.{ts,tsx}',
     'src/pages/recipe/**/*.{ts,tsx}',
+    'src/pages/index.page.tsx',
   ],
   // testPathIgnorePatterns: ['<rootDir>/src/**/*.test.tsx', '<rootDir>/src/**/*.spec.tsx'],
   collectCoverage: true,
