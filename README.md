@@ -133,3 +133,16 @@ Berikut adalah versi yang telah dirapikan baik dari segi **kalimat** maupun **Ma
 
 #### Sonar Result
 <img width="758" alt="image" src="https://github.com/user-attachments/assets/f7832649-8a0a-4a72-b428-ea7312892363" />
+
+
+### 🛠️ Challenge Encountered
+#### Tingginya Threshold Coverage di SonarCloud Free Tier
+SonarCloud secara default menetapkan ambang coverage kualitas minimal sebesar 80%, tanpa opsi untuk menyesuaikan threshold pada akun gratis. Hal ini menjadi tantangan karena codebase memiliki lebih dari 90.000 baris kode, namun yang dites hanya 3 file. Akibatnya, project langsung gagal dalam quality gate karena coverage secara keseluruhan menjadi sangat rendah.
+
+#### Kendala Akses VPS Menggunakan SSH
+Proses integrasi dan pengujian melalui server VPS menghadapi kendala karena perlu mencoba berbagai kombinasi konfigurasi SSH agar berhasil terhubung. Ini memakan waktu dan menyulitkan automasi, terutama saat testing pipeline dari CI/CD lokal.
+
+#### Codebase dari Repository Clone Tidak Siap Jalan
+Repository yang dikloning mengandung berbagai error dan dependensi rusak. Sebagian file belum berfungsi karena konfigurasi environment yang belum lengkap atau perbedaan versi dependensi, sehingga memerlukan debugging tambahan untuk bisa menjalankan dan menguji secara lokal maupun di CI.
+
+
