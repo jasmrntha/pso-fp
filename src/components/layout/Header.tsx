@@ -25,7 +25,7 @@ export default function Header() {
       <div className='layout flex h-16 items-center justify-between'>
         <UnstyledLink
           href='/'
-          className='font-bold text-primary-500 hover:text-primary-600'
+          className='text-2xl font-bold text-primary-500 hover:text-primary-600'
         >
           Buku Resep
         </UnstyledLink>
@@ -44,7 +44,7 @@ export default function Header() {
                 <li>
                   <button
                     onClick={handleLogout}
-                    className='rounded-md border-2 border-red-500 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-50 transition'
+                    className='rounded-md border-2 border-red-500 px-4 py-2 text-sm font-medium text-red-500 transition hover:bg-red-50'
                   >
                     Logout
                   </button>
